@@ -2,15 +2,43 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.15" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="02-Services\" />
+    <None Remove="03-Repositories\" />
+    <None Remove="Helpers\" />
+    <None Remove="Helpers\Extensions\" />
+    <None Remove="03-Repositories\Interfaces\" />
+    <None Remove="Models\" />
+    <None Remove="01-Controllers\V1\" />
+    <None Remove="01-Controllers\V1\Dtos\" />
+    <None Remove="02-Services\Interfaces\" />
+    <None Remove="Commands\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="02-Services\" />
+    <Folder Include="03-Repositories\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Helpers\Extensions\" />
+    <Folder Include="03-Repositories\Interfaces\" />
+    <Folder Include="Models\" />
+    <Folder Include="01-Controllers\V1\" />
+    <Folder Include="01-Controllers\V1\Dtos\" />
+    <Folder Include="02-Services\Interfaces\" />
+    <Folder Include="Commands\" />
+  </ItemGroup>
 </Project>

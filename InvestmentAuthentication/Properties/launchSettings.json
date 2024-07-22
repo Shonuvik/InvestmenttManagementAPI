@@ -9,24 +9,17 @@
     }
   },
   "profiles": {
-    "http": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5028",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "dotnetRunMessages": true
-    },
     "https": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7246;http://localhost:5028",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionStrings": "Server=localhost,1433;Database=master;User Id=sa;Password=Admin123;",
+        "JWTKey": "jksabdkjhqjxbhjkhlaksjxhkgqohxhkjaslxhjgqiuwhxkhaks_sdjwfkwjhxqjhx"
       },
+      "SystemName": "authenticationApi",
       "dotnetRunMessages": true
     },
     "IIS Express": {
