@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.15" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.20" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="02-Application\" />
+    <None Remove="03-Domain\" />
+    <None Remove="04-Infrastructure\" />
+    <None Remove="04-Infrastructure\DbContext\" />
+    <None Remove="04-Infrastructure\DbContext\Interfaces\" />
+    <None Remove="Helpers\" />
+    <None Remove="Helpers\Extensions\" />
+    <None Remove="04-Infrastructure\Repositories\" />
+    <None Remove="04-Infrastructure\Repositories\Interfaces\" />
+    <None Remove="04-Infrastructure\Repositories\Querys\" />
+    <None Remove="04-Infrastructure\Repositories\Commands\" />
+    <None Remove="03-Domain\Entities\" />
+    <None Remove="02-Application\Interfaces\" />
+    <None Remove="01-Controllers\V1\" />
+    <None Remove="01-Controllers\V1\Dtos\" />
+    <None Remove="03-Domain\Enums\" />
+    <None Remove="03-Domain\Exceptions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="02-Application\" />
+    <Folder Include="03-Domain\" />
+    <Folder Include="04-Infrastructure\" />
+    <Folder Include="04-Infrastructure\DbContext\" />
+    <Folder Include="04-Infrastructure\DbContext\Interfaces\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Helpers\Extensions\" />
+    <Folder Include="04-Infrastructure\Repositories\" />
+    <Folder Include="04-Infrastructure\Repositories\Interfaces\" />
+    <Folder Include="04-Infrastructure\Repositories\Querys\" />
+    <Folder Include="04-Infrastructure\Repositories\Commands\" />
+    <Folder Include="03-Domain\Entities\" />
+    <Folder Include="02-Application\Interfaces\" />
+    <Folder Include="01-Controllers\V1\" />
+    <Folder Include="01-Controllers\V1\Dtos\" />
+    <Folder Include="03-Domain\Enums\" />
+    <Folder Include="03-Domain\Exceptions\" />
+  </ItemGroup>
+</Project>

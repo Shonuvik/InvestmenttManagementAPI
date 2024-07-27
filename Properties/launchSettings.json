@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:7469",
+      "sslPort": 44312
+    }
+  },
+  "profiles": {
+    "https": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://localhost:7128;http://localhost:5196",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionStrings": "Server=localhost,1433;Database=master;User Id=sa;Password=Admin123;",
+        "JWTKey": "jksabdkjhqjxbhjkhlaksjxhkgqohxhkjaslxhjgqiuwhxkhaks_sdjwfkwjhxqjhx"
+      },
+      "dotnetRunMessages": true
+    }
+  }
+}
