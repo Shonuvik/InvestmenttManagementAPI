@@ -34,6 +34,7 @@
     <None Remove="01-Controllers\V1\Dtos\" />
     <None Remove="03-Domain\Enums\" />
     <None Remove="03-Domain\Exceptions\" />
+    <None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="02-Application\" />
@@ -53,5 +54,6 @@
     <Folder Include="01-Controllers\V1\Dtos\" />
     <Folder Include="03-Domain\Enums\" />
     <Folder Include="03-Domain\Exceptions\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>

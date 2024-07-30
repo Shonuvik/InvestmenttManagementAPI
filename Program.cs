@@ -1,6 +1,9 @@
 ﻿using System.Text;
 using System.Text.Json.Serialization;
+using InvestmentManagement.Application;
+using InvestmentManagement.Application.Interfaces;
 using InvestmentManagement.Helpers.Extensions;
+using InvestmentManagement.Infrastructure.Repositories.Commands;
 using InvestmentManagement.Infrastructure.Repositories.Interfaces;
 using InvestmentManagement.Infrastructure.Repositories.Querys;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -39,13 +42,13 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddDatabase(configuration);
+AddIoC(builder.Services);
+
 builder.Services.AddControllers().AddJsonOptions(opts => opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwagger();
-
-builder.Services.AddScoped<IUserQueryRepository, UserQueryRepository>();
-builder.Services.AddDatabase(configuration);
 
 var app = builder.Build();
 
@@ -63,3 +66,19 @@ app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "Investment Managemen
 
 app.Run();
 
+
+static void AddIoC(IServiceCollection services)
+{
+    //Repositories
+    services.AddScoped<IAssetQueryRepository, AssetQueryRepository>();
+
+    services.AddScoped<IUserQueryRepository, UserQueryRepository>();
+    services.AddScoped<IPortfolioQueryRepository, PortfolioQueryRepository>();
+
+    //Commands
+    services.AddScoped<IPortfolioCommandRepository, PortfolioCommandRepository>();
+    services.AddScoped<ITransactionCommandRepository, TransactionCommandRepository>();
+
+    services.AddScoped<IAssetPurchaseHandler, AssetPurchaseHandler>();
+    //Handler
+}

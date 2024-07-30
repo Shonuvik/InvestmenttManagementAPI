@@ -9,31 +9,34 @@ namespace InvestmentManagement.Domain.Entities
                            long assetId,
                            TransactionType transactionType,
                            int quantity,
-                           decimal unitPrice,
-                           decimal value,
-                           DateTime transactionDate)
+                           decimal unitPrice)
         {
             PortfolioId = portfolioId;
             AssetId = assetId;
             TransactionType = transactionType;
             Quantity = quantity;
             UnitPrice = unitPrice;
-            Value = value;
-            TransactionDate = transactionDate;
+            TransactionDate = DateTime.Now;
         }
 
-        public long PortfolioId { get; set; }
+        public long PortfolioId { get; private set; }
 
-        public long AssetId { get; set; }
+        public long AssetId { get; private set; }
 
-        public TransactionType TransactionType { get; set; }
+        public TransactionType TransactionType { get; private set; }
 
-        public int Quantity { get; set; }
+        public int Quantity { get; private set; }
 
-        public decimal UnitPrice { get; set; }
+        public decimal UnitPrice { get; private set; }
 
-        public decimal Value { get; set; }
+        public decimal Value { get; private set; }
 
-        public DateTime TransactionDate { get; set; }
+        public DateTime TransactionDate { get; private set; }
+
+
+        public void CalculatePurchaseValue()
+        {
+            Value = UnitPrice * Quantity;
+        }
     }
 }
