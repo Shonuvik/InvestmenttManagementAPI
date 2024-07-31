@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using Dapper;
-using InvestmentManagement.Infrastructure.DbContext;
 using InvestmentManagement.Infrastructure.DbContext.Interfaces;
 using InvestmentManagement.Infrastructure.Repositories.Interfaces;
 using InvestmentManagement.Models;

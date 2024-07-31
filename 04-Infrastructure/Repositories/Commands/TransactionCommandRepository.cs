@@ -46,7 +46,7 @@ namespace InvestmentManagement.Infrastructure.Repositories.Commands
             {
                 PORTFOLIO_ID = transaction.PortfolioId,
                 ASSET_ID = transaction.AssetId,
-                OPERATION_TYPE = transaction.TransactionType,
+                OPERATION_TYPE = transaction.TransactionType.ToString(),
                 QUANTITY = transaction.Quantity,
                 UNIT_PRICE = transaction.UnitPrice,
                 VALUE = transaction.Value,

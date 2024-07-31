@@ -71,7 +71,7 @@ static void AddIoC(IServiceCollection services)
 {
     //Repositories
     services.AddScoped<IAssetQueryRepository, AssetQueryRepository>();
-
+    services.AddScoped<ITransactionQueryRepository, TransactionQueryRepository>();
     services.AddScoped<IUserQueryRepository, UserQueryRepository>();
     services.AddScoped<IPortfolioQueryRepository, PortfolioQueryRepository>();
 
@@ -79,6 +79,7 @@ static void AddIoC(IServiceCollection services)
     services.AddScoped<IPortfolioCommandRepository, PortfolioCommandRepository>();
     services.AddScoped<ITransactionCommandRepository, TransactionCommandRepository>();
 
+    services.AddScoped<IAssetSellHandler, AssetSellHandler>();
     services.AddScoped<IAssetPurchaseHandler, AssetPurchaseHandler>();
     //Handler
 }

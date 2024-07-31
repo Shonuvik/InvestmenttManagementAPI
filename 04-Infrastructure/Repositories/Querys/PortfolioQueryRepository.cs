@@ -38,6 +38,27 @@ namespace InvestmentManagement.Infrastructure.Repositories.Querys
 
             return result;
         }
+
+        public async Task<long> GetPortfolioByUserName(string userName)
+        {
+            StringBuilder query = new();
+
+            query.Append($" SELECT                                        ");
+            query.Append($"      P.ID AS PortfolioId                      ");
+            query.Append($" FROM[User] U                                  ");
+            query.Append($" INNER JOIN[Portfolio] P ON U.ID = P.USER_ID   ");
+            query.Append($" WHERE U.USERNAME = @USERNAME                  ");
+
+            using var connection = _uow.DbConnection;
+            connection.Open();
+
+            var result = await connection.QueryFirstOrDefaultAsync<long>(query.ToString(), new
+            {
+                USERNAME = userName
+            });
+
+            return result;
+        }
     }
 }
 

@@ -38,5 +38,10 @@ namespace InvestmentManagement.Domain.Entities
         {
             Value = UnitPrice * Quantity;
         }
+
+        public void CalculateQuantityForSell()
+        {
+            Quantity = Convert.ToInt32(Value) / Convert.ToInt32(UnitPrice);
+        }
     }
 }

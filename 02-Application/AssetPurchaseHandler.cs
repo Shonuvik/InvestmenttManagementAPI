@@ -39,12 +39,14 @@ namespace InvestmentManagement.Application
 
             var portfolio = await _portfolioQuery.GetAssetBySymbolAsync(asset.AssetName, userName);
 
-            var portfolioEntity = ParseToEntity(asset, user);
-
-            var transactionEntity = ParseToEntity(portfolio, asset, dto);
+            var portfolioEntity = ParseToPortfolio(asset, user);
 
             if (portfolio == null)
                 await _portfolioCommand.CreateNewPorfolioAsync(portfolioEntity);
+
+            var portfolioId = await _portfolioQuery.GetPortfolioByUserName(userName);
+
+            var transactionEntity = ParseToTransaction(portfolioId, asset, dto);
 
             transactionEntity.CalculatePurchaseValue();
             var transactionResult = await _transactionCommand.CreateNewTransactionAsync(transactionEntity);
@@ -53,14 +55,14 @@ namespace InvestmentManagement.Application
                 throw new Exception("Falha ao tentar persistir uma nova transacao");
         }
 
-        private Portfolio ParseToEntity(AssetModel asset, User user)
+        private Portfolio ParseToPortfolio(AssetModel asset, User user)
         {
             return new Portfolio(user.Id, asset.AssetTypeId, asset.AssetTypeName, asset.AssetTypeDescription);
         }
 
-        private Transaction ParseToEntity(PortfolioModel portfolio, AssetModel asset, AssetPurchaseDto assetPurchaseDto)
+        private Transaction ParseToTransaction(long portfolioId, AssetModel asset, AssetPurchaseDto assetPurchaseDto)
         {
-            return new Transaction(portfolio.PorfolioId,
+            return new Transaction(portfolioId,
                                    asset.AssetId,
                                    TransactionType.C,
                                    assetPurchaseDto.Quantity,
