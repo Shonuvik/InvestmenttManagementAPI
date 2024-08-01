@@ -40,6 +40,45 @@ namespace InvestmentManagement.Infrastructure.Repositories.Querys
 
             return result;
         }
+
+        public async Task<List<AssetModel>> GetAssetAsync(string assetName, string assetType, string code)
+        {
+            StringBuilder query = new();
+            DynamicParameters parameters = new DynamicParameters();
+
+            query.Append($"SELECT                                                ");
+            query.Append($"     A.NAME AS {nameof(AssetModel.AssetName)}         ");
+            query.Append($"    ,AT.NAME AS {nameof(AssetModel.AssetTypeName)}    ");
+            query.Append($"    ,A.SYMBOL_CODE AS {nameof(AssetModel.Symbol)}     ");
+            query.Append($"    ,A.PRICE AS {nameof(AssetModel.UnitPrice)}        ");
+            query.Append($" FROM[Asset] A                                        ");
+            query.Append($" INNER JOIN[AssetType] AT ON A.TYPE_ID = AT.ID        ");
+            query.Append($" WHERE 1 = 1                                          ");
+
+            if (assetName != null)
+            {
+                query.Append($" AND A.NAME = @NAME ");
+                parameters.Add("@NAME", assetName);
+            }
+
+            if (code != null)
+            {
+                query.Append($" AND AT.NEGOTIATION_CODE = @NEGOTIATION_CODE");
+            }
+
+            if (assetType != null)
+            {
+                query.Append($" AND AT.NAME = @NAME ");
+                parameters.Add("@NAME", assetType);
+            }
+
+            using var connection = _uow.DbConnection;
+            connection.Open();
+
+            var result = (await connection.QueryAsync<AssetModel>(query.ToString(), parameters)).ToList();
+
+            return result;
+        }
     }
 }
 

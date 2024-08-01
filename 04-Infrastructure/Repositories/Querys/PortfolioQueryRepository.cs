@@ -39,7 +39,7 @@ namespace InvestmentManagement.Infrastructure.Repositories.Querys
             return result;
         }
 
-        public async Task<long> GetPortfolioByUserName(string userName)
+        public async Task<long> GetPortfolioIdByUserName(string userName)
         {
             StringBuilder query = new();
 
@@ -56,6 +56,33 @@ namespace InvestmentManagement.Infrastructure.Repositories.Querys
             {
                 USERNAME = userName
             });
+
+            return result;
+        }
+
+        public async Task<List<PortfolioModel>> GetPortfolioByUserName(string userName)
+        {
+            StringBuilder query = new();
+
+            query.Append($" SELECT                                        ");
+            query.Append($"        a.NAME AS AssetName                    ");
+            query.Append($"       ,p.NAME AS PortfolioName                ");
+            query.Append($"       ,p.DESCRIPTION AS Description           ");
+            query.Append($"       ,t.Quantity AS Quantity                 ");
+            query.Append($"       ,t.VALUE AS VALUE                       ");
+            query.Append($" FROM[User] u                                  ");
+            query.Append($" INNER JOIN[Portfolio] p on u.ID = p.USER_ID   ");
+            query.Append($" INNER JOIN[Transaction] t on p.ID = t.PORTFOLIO_ID ");
+            query.Append($" INNER JOIN[Asset] a on t.ASSET_ID = a.ID      ");
+            query.Append($" WHERE U.USERNAME = 'Marlon123'                ");
+
+            using var connection = _uow.DbConnection;
+            connection.Open();
+
+            var result = (await connection.QueryAsync<PortfolioModel>(query.ToString(), new
+            {
+                USERNAME = userName
+            })).ToList();
 
             return result;
         }

@@ -12,6 +12,8 @@
 
         public string AssetTypeDescription { get; set; }
 
+        public string Symbol { get; set; }
+
         public decimal UnitPrice { get; set; }
     }
 }

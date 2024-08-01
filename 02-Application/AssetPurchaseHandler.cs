@@ -44,7 +44,7 @@ namespace InvestmentManagement.Application
             if (portfolio == null)
                 await _portfolioCommand.CreateNewPorfolioAsync(portfolioEntity);
 
-            var portfolioId = await _portfolioQuery.GetPortfolioByUserName(userName);
+            var portfolioId = await _portfolioQuery.GetPortfolioIdByUserName(userName);
 
             var transactionEntity = ParseToTransaction(portfolioId, asset, dto);
 

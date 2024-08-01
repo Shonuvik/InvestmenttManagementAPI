@@ -1,6 +1,8 @@
 ﻿using InvestmentManagement.Application.Interfaces;
 using InvestmentManagement.Controllers.V1.Dtos;
 using InvestmentManagement.Helpers.Extensions;
+using InvestmentManagement.Infrastructure.Repositories.Interfaces;
+using InvestmentManagement.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 
@@ -12,11 +14,15 @@ namespace InvestmentManagement.Controllers
     {
         private readonly IAssetPurchaseHandler _assetPurchaseHandler;
         private readonly IAssetSellHandler _assetSellHandler;
+        private readonly IPortfolioQueryRepository _portfolioQueryRepository;
+
         public PortfolioManagementController(IAssetPurchaseHandler assetPurchaseHandler,
-                                             IAssetSellHandler assetSellHandler)
+                                             IAssetSellHandler assetSellHandler,
+                                             IPortfolioQueryRepository portfolioQueryRepository)
         {
             _assetPurchaseHandler = assetPurchaseHandler;
             _assetSellHandler = assetSellHandler;
+            _portfolioQueryRepository = portfolioQueryRepository;
         }
 
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -46,6 +52,29 @@ namespace InvestmentManagement.Controllers
             await _assetSellHandler.HandlerAsync(dto, name);
 
             return Ok("Transação de venda realizada com sucesso.");
+        }
+
+        [ProducesResponseType(typeof(List<PortfolioModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("SearchPortfolio")]
+        public async Task<IActionResult> SearchPortfolio()
+        {
+            Request.Headers.TryGetValue("Authorization", out StringValues value);
+            var name = value.GetName();
+
+            var result = await _portfolioQueryRepository.GetPortfolioByUserName(name);
+
+            if (result == null || !result.Any())
+                return NotFound();
+
+            return Ok(result.Select(x => new
+            {
+                Symbol = x.AssetName,
+                x.Description,
+                Portfolio = x.PortfolioName,
+                x.Quantity,
+                x.Value
+            }));
         }
     }
 }
