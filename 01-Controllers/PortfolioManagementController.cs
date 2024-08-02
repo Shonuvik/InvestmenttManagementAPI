@@ -3,11 +3,13 @@ using InvestmentManagement.Controllers.V1.Dtos;
 using InvestmentManagement.Helpers.Extensions;
 using InvestmentManagement.Infrastructure.Repositories.Interfaces;
 using InvestmentManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 
 namespace InvestmentManagement.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PortfolioManagementController : ControllerBase

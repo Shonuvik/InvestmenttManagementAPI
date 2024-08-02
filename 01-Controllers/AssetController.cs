@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InvestmentManagement.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class AssetController : ControllerBase
@@ -16,7 +16,7 @@ namespace InvestmentManagement.Controllers
             _assetQuery = assetQuery;
         }
 
-        [Authorize]
+        //[Authorize]
         [ProducesResponseType(typeof(List<AssetModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
